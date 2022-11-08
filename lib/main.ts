@@ -61,7 +61,7 @@ function parseCommit(commit: ICommit) {
   return { username, message };
 }
 
-function getLineFromCommit(commit: ICommit) {
+function getLineFromCommit(owner: string, repo: string, commit: ICommit) {
   const { username, message } = parseCommit(commit);
 
   // if contains "#1234", then → [#1234](https://github.com/xxx/yyy/pull/52071)
@@ -71,7 +71,7 @@ function getLineFromCommit(commit: ICommit) {
   if (result) {
     let groups = result.groups;
     if (groups) {
-      let prUrl = `[#${groups.number}](https://github.com/vikadata/vikadata/pull/${groups.number})`;
+      let prUrl = `[#${groups.number}](https://github.com/${owner}/${repo}/pull/${groups.number})`;
       mdMessage = message.replace(reg, prUrl);
     }
   }
@@ -116,26 +116,26 @@ async function main(
   const now = DateTime.now();
   const date = now.toFormat("yyyy-MM-dd");
 
-  str += `## [${to}](https://github.com/vikadata/vikadata/releases/tag/${to}) (${date})\n\n`;
+  str += `## [${to}](https://github.com/${owner}/${repo}/releases/tag/${to}) (${date})\n\n`;
 
   if (features.length > 0) {
     str += "\n### Features and enhancements\n\n";
   }
   for (const commit of features) {
-    str += getLineFromCommit(commit);
+    str += getLineFromCommit(owner, repo, commit);
   }
 
   if (fixes.length > 0) {
     str += "\n### Bug fixes\n\n";
   }
   for (const commit of fixes) {
-    str += getLineFromCommit(commit);
+    str += getLineFromCommit(owner, repo, commit);
   }
   if (more.length > 0) {
     str += "\n### What's more\n\n";
   }
   for (const commit of more) {
-    str += getLineFromCommit(commit);
+    str += getLineFromCommit(owner, repo, commit);
   }
 
   console.log(str);

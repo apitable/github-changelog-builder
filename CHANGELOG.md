@@ -2,7 +2,7 @@
 # CHANGELOG
 
 
-## [1.1.0](https://github.com/vikadata/vikadata/releases/tag/v1.1.0) (2022-11-08)
+## [1.1.0](https://github.com/apitable/github-changelog-builder/releases/tag/v1.1.0) (2022-11-08)
 
 
 ### Features and enhancements
