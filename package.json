@@ -1,12 +1,15 @@
 {
   "name": "github-changelog-builder",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Quick build a beautiful github-friendly changelog from commits between two tags or commits with Github API",
-  "main": "./dist/index.js",
-  "files": ["./dist"],
+  "main": "dist/index.js",
+  "files": ["dist", "types"],
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "github-changelog-builder": "bin/index.js"
   },
   "repository": {
     "type": "git",
