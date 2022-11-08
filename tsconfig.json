@@ -9,9 +9,10 @@
       "outDir":"dist",
       "sourceMap": true,
       "declaration": true,
-      "declarationDir": "./types"
+      "declarationDir": "./types",
+      "resolveJsonModule": true
     },
-    "include": ["src/**/*"],
+    "include": ["lib/**/*"],
     "$schema": "https://json.schemastore.org/tsconfig",
     "display": "Recommended"
   }
