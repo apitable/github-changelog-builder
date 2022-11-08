@@ -1,9 +1,11 @@
 {
   "name": "github-changelog-builder",
   "version": "1.0.0",
-  "description": "A Deno program to generate Github-friendly changelog",
-  "main": "index.js",
+  "description": "Quick build a beautiful github-friendly changelog from commits between two tags or commits with Github API",
+  "main": "./dist/index.js",
+  "files": ["./dist"],
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

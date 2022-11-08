@@ -99,7 +99,8 @@ async function main (token: string, owner: string, repo: string, from: string, t
     }
 
     let str = "";
-    const date = DateTime.format(new Date(), "yyyy-MM-dd");
+    const now = DateTime.now();
+    const date = now.toFormat("yyyy-MM-dd");
 
     str += `## [${to}](https://github.com/vikadata/vikadata/releases/tag/${to}) (${date})\n\n`
 
@@ -127,14 +128,20 @@ async function main (token: string, owner: string, repo: string, from: string, t
 
     console.log("\n\n\nAppending to file: ", appendFile);
 
-    const changelog = await fs.readFileSync(appendFile);
-    let firstHeadIndex = changelog.indexOf("## ")
+    let changelogText: string;
+    if (fs.existsSync(appendFile)) {
+        changelogText = await fs.readFileSync(appendFile);
+    } else {
+        changelogText = '';
+    }
+
+    let firstHeadIndex = changelogText.indexOf("## ")
 
     let newChangelog = ""
     if (firstHeadIndex == -1) {
-        newChangelog = changelog + "\n\n" + str;
+        newChangelog = changelogText + "\n\n" + str;
     } else {
-        newChangelog = changelog.slice(0, firstHeadIndex) + str + changelog.slice(firstHeadIndex);
+        newChangelog = changelogText.slice(0, firstHeadIndex) + str + changelogText.slice(firstHeadIndex);
     }
 
     await fs.writeFileSync(appendFile, newChangelog);
@@ -162,7 +169,6 @@ Github Changelog Builder
 Quick build a beautiful github-friendly changelog from commits between two tags or commits with Github API
 
 https://github.com/apitable/github-changelog-builder
-
   
   `)
   .version("v0.0.1")
