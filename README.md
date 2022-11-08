@@ -21,5 +21,5 @@ npx github-changelog-builder \
                         --repo ${GITHUB_REPO:-apitable} \
                         --from ${FROM:-d36e31baa93655db5b6bb38843a7dfe625b08749} \
                         --to ${TO:-HEAD} \
-                        --append-file ${CHANGELOG_FILE:-CHANGELOG}
+                        --append-file ${CHANGELOG_FILE:-CHANGELOG.md}
 ```
