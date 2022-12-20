@@ -56,7 +56,7 @@ interface ICommit {
 }
 
 function parseCommit(commit: ICommit) {
-  const username = commit.author.login;
+  const username = commit.author ? commit.author.login : commit.commit.author.name;
   const message = commit.commit.message.split(/\r?\n/)[0];
   return { username, message };
 }
