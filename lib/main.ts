@@ -51,12 +51,15 @@ interface ICommit {
     login: string;
   };
   commit: {
+    author: {
+      name: string;
+    }
     message: string;
   };
 }
 
 function parseCommit(commit: ICommit) {
-  const username = commit.author.login;
+  const username = commit.author ? `@${commit.author.login}` : commit.commit.author.name;
   const message = commit.commit.message.split(/\r?\n/)[0];
   return { username, message };
 }
@@ -76,7 +79,7 @@ function getLineFromCommit(owner: string, repo: string, commit: ICommit) {
     }
   }
 
-  const mdUsername = `@${username}`;
+  const mdUsername = `${username}`;
 
   return `* ${mdMessage} ${mdUsername} \n`;
 }
